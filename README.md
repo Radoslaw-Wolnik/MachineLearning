@@ -11,3 +11,8 @@ _Machines... They... They...  Are learning!_
 </details>
 
 <br>
+
+
+Todo:
+> rozpoznawanie mowy ptaków
+
