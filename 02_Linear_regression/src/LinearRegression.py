@@ -10,11 +10,12 @@ class LinearRegression:
         self.bias = None
 
     def fit(self, X, y):
-        # initial paramiters
+        # initial parameters
         n_samples, n_features = X.shape
         self.weights = np.zeros(n_features) # for each component we put zero
         self.bias = 0
-        # gradient decetns method
+        # gradient descent method
+        # look into that more
         for _ in range(self.n_iters):
             # approximation of y = weigts * x + bias
             y_predicted = np.dot(X, self.weights) + self.bias
