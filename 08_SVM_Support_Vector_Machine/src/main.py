@@ -12,7 +12,8 @@ def visuals(X, weight, bias):
         return (-w[0] * x + b + offset) / w[1]
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    plt.scatter(X[:, 0], X[:, 1], marker='o', c='darkorchid')
+    col = np.where(X[:, 0] < 2.5, 'b', 'r')
+    plt.scatter(X[:, 0], X[:, 1], marker='o', c=col)
     x0_1 = np.amin(X[:, 0])
     x0_2 = np.amax(X[:, 0])
 
