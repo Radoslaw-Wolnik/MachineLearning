@@ -14,5 +14,7 @@ _Machines... They... They...  Are learning!_
 
 
 Todo:
+> implement all basic algo
+> do the data alanalys and chose the best one for actual data (3) + cross validation
 > rozpoznawanie mowy ptaków
 
