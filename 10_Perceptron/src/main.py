@@ -7,14 +7,38 @@ from Perceptron import Perceptron
 # royalblue, lightcoral, salmon, gold, forestgreen, limegreen, mediumseagreen, springgreen, teal, cornflowerblue, navy, darkorchid, purple
 
 
+def accuracy(y_true, y_predicted):
+    return np.sum(y_true == y_predicted) / len(y_true)
+
+
 if __name__ == '__main__':
-    print("Project name")
+    print("Perceptron")
 
-    bc = datasets.load_breast_cancer()
-    X, y = bc.data, bc.target
+    X, y = datasets.make_blobs(n_samples=150, n_features=2, centers=2, cluster_std=1.05, random_state=123)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=123)
 
-    fig = plt.figure(figsize=(8, 6))
-    plt.scatter(X[:, 0], y, color='royalblue', marker='o', s=20, alpha=0.5)
+    p = Perceptron(learning_rate=0.01, number_iterations=1000)
+    p.fit(X_train, y_train)
+    predictions = p.predict(X_test)
+
+    print(f'Perceptron prediction accuracy: {accuracy(y_test, predictions)}')
+
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    plt.scatter(X_train[:, 0], X_train[:, 1], marker='o', c=y_train, cmap='viridis')
+
+    x0_1 = np.amin(X_train[:, 0])
+    x0_2 = np.amax(X_train[:, 0])
+
+    x1_1 = (-p.weights[0] * x0_1 - p.bias) / p.weights[1]
+    x1_2 = (-p.weights[0] * x0_2 - p.bias) / p.weights[1]
+
+    ax.plot([x0_1, x0_2], [x1_1, x1_2], 'k')
+
+    ymin = np.amin(X_train[:, 1])
+    ymax = np.amax(X_train[:, 1])
+    ax.set_ylim(ymin-3, ymax+3)
+    plt.colorbar()
     plt.show()
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
+
